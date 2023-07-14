@@ -21,6 +21,8 @@ const (
 )
 
 func main() {
+	defer clearTmpDir()
+
 	apiKey := os.Getenv("OPENAI_API_KEY")
 	if apiKey == "" {
 		log.Fatalln("missing OPENAI_API_KEY")
@@ -76,6 +78,17 @@ func main() {
 
 		if _, err := outFile.Write(str); err != nil {
 			log.Fatalf("could not to write to '%s' output file: %s\n", outputFile, err)
+		}
+		return nil
+	})
+}
+
+func clearTmpDir() {
+	filepath.Walk(tmpDir, func(path string, info os.FileInfo, err error) error {
+		if strings.HasSuffix(path, wavExt) {
+			if err := os.Remove(path); err != nil {
+				log.Fatalf("could not to remove '%s' file: %s\n", path, err)
+			}
 		}
 		return nil
 	})
