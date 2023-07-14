@@ -42,7 +42,7 @@ func main() {
 		if !strings.HasSuffix(inputFileName, inputExt) {
 			return nil
 		}
-		g
+
 		if info.IsDir() {
 			return nil
 		}
