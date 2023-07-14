@@ -12,7 +12,7 @@ import (
 
 const (
 	defaultModel string = "whisper-1"
-	inputDir     string = "samples" + string(os.PathSeparator)
+	inputDir     string = "data" + string(os.PathSeparator)
 	inputExt     string = ".mp4"
 	outputDir    string = "output" + string(os.PathSeparator)
 	outputExt    string = ".srt"
