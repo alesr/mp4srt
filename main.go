@@ -31,14 +31,18 @@ func main() {
 	client := whisperclient.New(apiKey, defaultModel)
 
 	filepath.Walk(inputDir, func(path string, info os.FileInfo, err error) error {
-		inputFileName := info.Name()
-		wavFileName := strings.ReplaceAll(inputFileName, inputExt, wavExt)
-		outputFileName := strings.ReplaceAll(inputFileName, inputExt, outputExt)
-
 		if err != nil {
 			log.Fatalf("could not to get stats of '%s' file: %s\n", path, err)
 		}
 
+		inputFileName := info.Name()
+		wavFileName := strings.ReplaceAll(inputFileName, inputExt, wavExt)
+		outputFileName := strings.ReplaceAll(inputFileName, inputExt, outputExt)
+
+		if !strings.HasSuffix(inputFileName, inputExt) {
+			return nil
+		}
+		g
 		if info.IsDir() {
 			return nil
 		}
